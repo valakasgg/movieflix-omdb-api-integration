@@ -12,7 +12,11 @@ interface MovieListProps {
   currentPage: number;
 }
 
-export default function MovieList({ movies, query, currentPage }: MovieListProps) {
+export default function MovieList({
+  movies,
+  query,
+  currentPage,
+}: MovieListProps) {
   const container = {
     hidden: { opacity: 0 },
     show: {
@@ -20,37 +24,50 @@ export default function MovieList({ movies, query, currentPage }: MovieListProps
       transition: {
         staggerChildren: 0.05,
         delayChildren: 0.1,
-        ease: easeInOut
-      }
-    }
+        ease: easeInOut,
+      },
+    },
   };
-  
+
   const item = {
     hidden: { opacity: 0, y: 20 },
-    show: { 
-      opacity: 1, 
+    show: {
+      opacity: 1,
       y: 0,
       transition: {
         duration: 0.4,
-        ease: easeInOut
-      }
-    }
+        ease: easeInOut,
+      },
+    },
   };
 
   if (!movies.Search || movies.Search.length === 0) {
     return (
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="mt-8"
       >
         <Card className="bg-[#181818] border-[#333]">
           <CardContent className="flex flex-col items-center justify-center py-16 px-4">
-            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-400 mb-4">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="64"
+              height="64"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="text-gray-400 mb-4"
+            >
               <circle cx="12" cy="12" r="10"></circle>
               <line x1="8" y1="12" x2="16" y2="12"></line>
             </svg>
-            <p className="text-xl text-gray-400 text-center">No movies found for "{query}"</p>
+            <p className="text-xl text-gray-400 text-center">
+              No movies found for &quot;{query}&quot;
+            </p>
             <p className="text-sm text-gray-500 mt-2 text-center">
               Try adjusting your search or checking for typos
             </p>
@@ -69,30 +86,35 @@ export default function MovieList({ movies, query, currentPage }: MovieListProps
       transition={{ duration: 0.5 }}
       className="pb-16"
     >
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
         className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-2"
       >
         <h2 className="text-xl sm:text-2xl font-medium text-white">
-          <span className="text-[#e50914]">{movies.totalResults}</span> results for "{query}"
+          <span className="text-[#e50914]">{movies.totalResults}</span> results
+          for &quot;{query}&quot;
         </h2>
       </motion.div>
-      
+
       <div className="space-y-10">
         <section>
-          <motion.h3 
+          <motion.h3
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3 }}
             className="text-lg sm:text-xl font-medium mb-4 text-white flex items-center"
           >
-            <span className="relative before:content-[''] before:absolute before:-bottom-0.5 before:left-0 before:w-full before:h-0.5 before:bg-[#e50914] pb-0.5">Top Matches</span>
-            <span className="ml-2 text-gray-400 text-sm font-normal">Based on your search</span>
+            <span className="relative before:content-[''] before:absolute before:-bottom-0.5 before:left-0 before:w-full before:h-0.5 before:bg-[#e50914] pb-0.5">
+              Top Matches
+            </span>
+            <span className="ml-2 text-gray-400 text-sm font-normal">
+              Based on your search
+            </span>
           </motion.h3>
-          
-          <motion.div 
+
+          <motion.div
             variants={container}
             initial="hidden"
             animate="show"
@@ -105,17 +127,17 @@ export default function MovieList({ movies, query, currentPage }: MovieListProps
             ))}
           </motion.div>
         </section>
-        
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
           className="mt-8"
         >
-          <Pagination 
-            currentPage={currentPage} 
-            totalPages={totalPages} 
-            query={query} 
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            query={query}
           />
         </motion.div>
       </div>

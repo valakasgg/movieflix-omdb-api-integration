@@ -1,4 +1,4 @@
-import { renderHook, waitFor } from '@testing-library/react';
+import { renderHook } from '@testing-library/react';
 import { useMovieSearch, useMovieDetails } from '../useMovieSearch';
 import { searchMovies, getMovieDetails } from '../../lib/omdb';
 
@@ -7,7 +7,7 @@ jest.mock('../../lib/omdb', () => ({
   getMovieDetails: jest.fn(),
 }));
 
-jest.mock('swr', () => {
+jest.mock('swr', () => { 
   return {
     __esModule: true,
     default: jest.fn((key, fetcher) => {
@@ -16,7 +16,7 @@ jest.mock('swr', () => {
       if (key[0] === '/api/search') {
         return {
           data: { Search: [], totalResults: 0 },
-          error: undefined,
+  // ...existing code...
           isLoading: false,
         };
       }

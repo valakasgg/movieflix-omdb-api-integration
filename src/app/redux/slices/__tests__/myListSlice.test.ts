@@ -108,11 +108,12 @@ describe('myListSlice', () => {
   it('should load the initial state from localStorage', () => {
     const movies = [mockMovie1, mockMovie2];
     localStorageMock.setItem('myList', JSON.stringify(movies));
-    
+
     jest.resetModules();
-    const freshModule = require('../myListSlice');
-    
-    const initialState = freshModule.default(undefined, { type: undefined });
-    expect(initialState.items.length).toBe(2);
+    (async () => {
+      const freshModule = await import('../myListSlice');
+      const initialState = freshModule.default(undefined, { type: '' });
+      expect(initialState.items.length).toBe(2);
+    })();
   });
 });

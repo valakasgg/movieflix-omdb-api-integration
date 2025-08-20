@@ -16,56 +16,56 @@ export default function SearchBar({ initialQuery = "" }: SearchBarProps) {
   const router = useRouter();
   const [query, setQuery] = useState(initialQuery);
   const [isFocused, setIsFocused] = useState(false);
-  
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (query.trim()) {
       router.push(`/?query=${encodeURIComponent(query)}&page=1`);
     }
   };
-  
+
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       handleSubmit(e);
     }
   };
-  
+
   const clearSearch = () => {
     setQuery("");
-    const inputElement = document.querySelector('input');
+    const inputElement = document.querySelector("input");
     if (inputElement) inputElement.focus();
   };
 
   return (
-    <motion.form 
+    <motion.form
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ 
+      transition={{
         duration: 0.5,
-        ease: easeInOut
+        ease: easeInOut,
       }}
-      onSubmit={handleSubmit} 
+      onSubmit={handleSubmit}
       className="w-full max-w-xl mx-auto"
     >
-      <motion.div 
+      <motion.div
         className={cn(
           "flex items-center overflow-hidden rounded-md border transition-all duration-300",
-          isFocused 
-            ? "border-[#e50914] shadow-lg shadow-[#e50914]/20 bg-black/90" 
+          isFocused
+            ? "border-[#e50914] shadow-lg shadow-[#e50914]/20 bg-black/90"
             : "border-[#333] bg-black/80 hover:bg-black/90"
         )}
         whileHover={{ scale: 1.01 }}
-        transition={{ 
-          type: "spring", 
-          stiffness: 400, 
+        transition={{
+          type: "spring",
+          stiffness: 400,
           damping: 20,
-          ease: easeInOut
+          ease: easeInOut,
         }}
       >
         <div className="flex-shrink-0 pl-3 pr-1 text-gray-400">
           <Search size={18} />
         </div>
-        
+
         <Input
           type="text"
           value={query}
@@ -78,7 +78,7 @@ export default function SearchBar({ initialQuery = "" }: SearchBarProps) {
           aria-label="Search for movies, TV shows, people"
           autoFocus
         />
-        
+
         {query && (
           <Button
             type="button"
@@ -89,7 +89,7 @@ export default function SearchBar({ initialQuery = "" }: SearchBarProps) {
             <X size={18} />
           </Button>
         )}
-        
+
         <Button
           type="submit"
           className="bg-[#e50914] hover:bg-[#f40612] text-white h-full py-2 px-3 sm:px-5 rounded-none font-medium text-sm border-l border-[#333]"
@@ -100,10 +100,13 @@ export default function SearchBar({ initialQuery = "" }: SearchBarProps) {
           <Search className="h-4 w-4 xs:hidden" />
         </Button>
       </motion.div>
-      
+
       {isFocused && (
         <div className="mt-2 text-xs text-gray-400 px-1">
-          <p>Try searching for movies like "Inception", "The Godfather", or "Avengers"</p>
+          <p>
+            Try searching for movies like &quot;Inception&quot;, &quot;The
+            Godfather&quot;, or &quot;Avengers&quot;
+          </p>
         </div>
       )}
     </motion.form>
